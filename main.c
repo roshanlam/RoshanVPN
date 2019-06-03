@@ -2,8 +2,6 @@
  * RoshanVPN
  * Copyright (C) 2019 Roshan Lamichane <roshanlamichhane.com>
  * https://github.com/roshancode
- * https://github.com/roshanlam 
- * 
  *  This Program was developed by Roshan Lamichhane
  */
  
