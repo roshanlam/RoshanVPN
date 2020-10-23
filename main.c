@@ -1,7 +1,7 @@
 /*
  * RoshanVPN
- * Copyright (C) 2019 Roshan Lamichane <roshanlamichhane.com>
- * https://github.com/roshancode
+ * Copyright (C) 2019 Roshan Lamichane <roshanlamichhane.tech>
+ * https://github.com/roshanlam
  *  This Program was developed by Roshan Lamichhane
  */
  
@@ -70,8 +70,7 @@ int md_len = 0;
 int DEBUG = 0;
 char *progname;
 
-void do_encrypt(char *in, int inl, char *out, int *outl)
-{
+void do_encrypt(char *in, int inl, char *out, int *outl){
     EVP_CIPHER_CTX ctx;
     int tmpl = 0;
 
@@ -89,8 +88,7 @@ void do_encrypt(char *in, int inl, char *out, int *outl)
     if (DEBUG) write(1,"5", 1);
 }
 
-void do_decrypt(char *in, int inl, char *out, int *outl)
-{
+void do_decrypt(char *in, int inl, char *out, int *outl){
     EVP_CIPHER_CTX ctx;
     int tmpl = 0;
 
@@ -134,18 +132,16 @@ int isEqual(char *h1, char *h2, int len){
     return 1;
 }
 
-void printHash(unsigned char *hash,int len)
-{
+void printHash(unsigned char *hash,int len){
     int i=0;
 
-    while ( i<len) {
+    while (i < len) {
         printf("%02x",(unsigned int)hash[i]);
         i++;
     }
 }
 
-void dumpBuf(unsigned char *buf, int len)
-{
+void dumpBuf(unsigned char *buf, int len){
     int i = 0;
 
     for (i=0; i<len; i++) {
@@ -153,8 +149,7 @@ void dumpBuf(unsigned char *buf, int len)
     }
 }
 
-void createHash(unsigned char *in, int inl, unsigned char *md_value, int *md_len)
-{
+void createHash(unsigned char *in, int inl, unsigned char *md_value, int *md_len){
     HMAC_CTX ctx;
     const EVP_MD *md;
 
@@ -170,14 +165,12 @@ void createHash(unsigned char *in, int inl, unsigned char *md_value, int *md_len
     if (DEBUG) printf(" md_len: %d\n",*md_len);
 }
 
-void usage()
-{
+void usage(){
     fprintf(stderr, "Usage: %s [-s port|-c targetip:port] [-e]\n", progname);
     exit(0);
 }
 
-int getch()
-{
+int getch(){
     int r;
     unsigned char c;
     if ((r = read(0, &c, sizeof(c))) < 0) {
@@ -187,24 +180,21 @@ int getch()
     }
 }
 
-void randomizeString(char *pszStr,int len)
-{
+void randomizeString(char *pszStr,int len){
    int i;
-   for (i=0; i<len; i++) {
+   for (i = 0; i < len; i++) {
       pszStr[i] = rand() % 93 + 33;
    }//for
 }
 
-void randomizeArray(unsigned char *pArray,int len)
-{
+void randomizeArray(unsigned char *pArray,int len){
    int i;
    for (i=0; i<len; i++) {
       pArray[i] = rand() % 255;
    }//for
 }
 
-void displayClientMenu(void)
-{
+void displayClientMenu(void){
    /* Display menu of choices */
    printf("\n");
    printf("k - Enter KEY\n");
@@ -216,8 +206,7 @@ void displayClientMenu(void)
    fflush(stdout);
 }
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]){
    struct sockaddr_in sin, from, sout;
    struct ifreq ifr;
    int fd_tunnel, fd_udp, fd_tcp, fromlen, soutlen, port, PORT, l;
@@ -788,8 +777,7 @@ int main(int argc, char *argv[])
                   err = SSL_write(ssl,"POKE",strlen("POKE"));
                   memset(pokemsg,0,sizeof(pokemsg));
                   err = SSL_read(ssl,pokemsg,sizeof(msg)-1);
-                  if ((-1 == err) || (strncmp(pokemsg,"POKE_ACK",8)))
-                  {
+                  if ((-1 == err) || (strncmp(pokemsg,"POKE_ACK",8))){
                      /* Client did not respond -OR- invalid reponse */
                      if (err >= 0) {
                         pokemsg[err] = '\0';
